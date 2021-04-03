@@ -48,48 +48,8 @@ The first four bytes are used for MCU identification, commands, data lengths and
 
 ## Flash-App
 
-The remote application for flashing the MCU using the CAN bus is written in [Node.js](https://nodejs.org/) and located in the [mcp-can-boot-flash-app repository](https://github.com/crycode-de/mcp-can-boot-flash-app).
-
-The flash-app is also available on *npm* as `mcp-can-boot-flash-app`.
-
-No need to install: Just run the flash-app using `npx` (this will take a moment):
-
-```
-npx mcp-can-boot-flash-app [...]
-```
-
-Or install it globally and run it if you need it more often:
-
-```
-npm install -g mcp-can-boot-flash-app
-mcp-can-boot-flash-app [...]
-```
-
-### Flash-App parameters
-
-```
---file, -f       Hex file to flash                         [string] [required]
---iface, -i      CAN interface to use               [string] [default: "can0"]
---partno, -p     Specific AVR device like in avrdude       [string] [required]
---mcuid, -m      ID of the MCU bootloader                  [string] [required]
--e               Erase whole flash before flashing new data          [boolean]
--V               Do not verify                                       [boolean]
--r               Read flash and save to given file (no flashing!), optional
-                 with maximum address to read until                   [string]
--F               Force flashing, even if the bootloader version missmatched
-                                                                     [boolean]
---can-id-mcu     CAN-ID for messages from MCU to remote
-                                                [string] [default: 0x1F1]
---can-id-remote  CAN-ID for messages from remote to MCU
-                                                [string] [default: 0x1F2]
---help, -h       Show help                                           [boolean]
-```
-
-Example:
-
-```
-npx mcp-can-boot-flash-app -f firmware.hex -p m1284p -m 0x0042
-```
+Todo: Change to Normal CAN-ID: 0x000
+...
 
 ## Detailed description of the CAN messages
 
