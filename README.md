@@ -38,8 +38,8 @@ The whole communication via the CAN bus uses only two extended frame CAN-IDs.
 
 *Defaults:*
 
-* `0x1FFFFF01` for messages from MCU to remote
-* `0x1FFFFF02` for messages from remote to MCU
+* `0x1F1` for messages from MCU to remote
+* `0x1F2` for messages from remote to MCU
 
 Using this two IDs nearly at the end of CAN-ID range with the lowest priority there will be almost none interference flashing an MCU in a active CAN system.
 
@@ -79,9 +79,9 @@ mcp-can-boot-flash-app [...]
 -F               Force flashing, even if the bootloader version missmatched
                                                                      [boolean]
 --can-id-mcu     CAN-ID for messages from MCU to remote
-                                                [string] [default: 0x1FFFFF01]
+                                                [string] [default: 0x1F1]
 --can-id-remote  CAN-ID for messages from remote to MCU
-                                                [string] [default: 0x1FFFFF02]
+                                                [string] [default: 0x1F2]
 --help, -h       Show help                                           [boolean]
 ```
 
