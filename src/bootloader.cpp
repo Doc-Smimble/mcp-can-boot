@@ -97,8 +97,8 @@ int main () {
   mcp2515.setBitrate(CAN_KBPS, MCP_CLOCK);
 
   // set mcp2515 filter to accept CAN_ID_REMOTE_TO_MCU only
-  mcp2515.setFilterMask(MCP2515::MASK0, true, CAN_EFF_MASK);
-  mcp2515.setFilter(MCP2515::RXF0, true, CAN_ID_REMOTE_TO_MCU);
+  mcp2515.setFilterMask(MCP2515::MASK0, false, CAN_SFF_MASK);
+  mcp2515.setFilter(MCP2515::RXF0, false, CAN_ID_REMOTE_TO_MCU);
 
   mcp2515.setNormalMode();
 
@@ -106,7 +106,7 @@ int main () {
   uint16_t mcuId = MCU_ID;
 
   // send bootloader start message
-  canMsg.can_id = CAN_ID_MCU_TO_REMOTE | CAN_EFF_FLAG;
+  canMsg.can_id = CAN_ID_MCU_TO_REMOTE;
   canMsg.can_dlc = 8;
   canMsg.data[CAN_DATA_BYTE_MCU_ID_MSB]   = MCU_ID_MSB;
   canMsg.data[CAN_DATA_BYTE_MCU_ID_LSB]   = MCU_ID_LSB;
@@ -141,7 +141,7 @@ int main () {
     // try to get a message from the CAN controller
     if (mcp2515.readMessage(&canMsg) == MCP2515::ERROR_OK) {
       // got a message...
-      if (canMsg.can_id == (CAN_ID_REMOTE_TO_MCU | CAN_EFF_FLAG)
+      if (canMsg.can_id == CAN_ID_REMOTE_TO_MCU
         && canMsg.can_dlc == 8
         && canMsg.data[CAN_DATA_BYTE_MCU_ID_MSB] == MCU_ID_MSB
         && canMsg.data[CAN_DATA_BYTE_MCU_ID_LSB] == MCU_ID_LSB) {
@@ -157,7 +157,7 @@ int main () {
         ledTime = curTime + 100;
 
         // set the can_id once to save flash space
-        canMsg.can_id = CAN_ID_MCU_TO_REMOTE | CAN_EFF_FLAG;
+        canMsg.can_id = CAN_ID_MCU_TO_REMOTE;
 
         if (!flashing) {
           // we are not in bootloading mode... only halde flash init messages
