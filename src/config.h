@@ -15,10 +15,11 @@
 /**
  * Optional definition of a LED port, which will be used to indicate
  * bootloader actions.
+ * Doc-Smimble: Arduino Nano V3 = LED at D4
  */
-//#define LED      PORTA1
-//#define LED_DDR  DDRA
-//#define LED_PORT PORTA
+#define LED      PORTD4
+#define LED_DDR  DDRD
+#define LED_PORT PORTD
 
 /**
  * The ID of the MCU to identify it in bootloader CAN messages.
@@ -44,7 +45,7 @@
  * CAN_50KBPS, CAN_80KBPS, CAN_83K3BPS, CAN_95KBPS, CAN_100KBPS, CAN_125KBPS,
  * CAN_200KBPS, CAN_250KBPS, CAN_500KBPS or CAN_1000KBPS
  */
-#define CAN_KBPS CAN_500KBPS
+#define CAN_KBPS CAN_125KBPS
 
 /**
  * Clock speed of the MCP2515 CAN controller.
@@ -71,12 +72,14 @@
 
 /**
  * CAN-ID for bootloader message from MCU to remote.
+ * #define CAN_ID_MCU_TO_REMOTE 0x1FFFFF01UL
  */
-#define CAN_ID_MCU_TO_REMOTE 0x1FFFFF01UL
+#define CAN_ID_MCU_TO_REMOTE 0x1F1
 
 /**
  * CAN-ID for bootloader message from remote to MCU.
+ * #define CAN_ID_REMOTE_TO_MCU 0x1FFFFF02UL
  */
-#define CAN_ID_REMOTE_TO_MCU 0x1FFFFF02UL
+#define CAN_ID_REMOTE_TO_MCU 0x1F2
 
 #endif
